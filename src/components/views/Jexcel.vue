@@ -1,33 +1,122 @@
 <template>
   <div>
-    <div id="app" ref="spreadsheet"></div>
-    <div><input type="button" value="Add new row" @click="() => spreadsheet.insertRow()" /></div>
+    <div id="spreadsheet">
+      <input type="button" value="Add new row" @click="() => spreadsheet.insertRow()" />
+      <input type="button" value="Delete row" @click="() => spreadsheet.deleteRow()" />
+    </div>
   </div>
 </template>
 
 <script>
 import jexcel from 'jexcel'
 import 'jexcel/dist/jexcel.css'
-var data = [
-  ['Jazz', 'Honda', '2019-02-12', '', '', true],
-  ['Civic', 'Honda', '2018-07-11', '', '', true]
-]
+import axios from 'axios'
+var changed = function(instance, cell, x, y, value) {
+  x = parseInt(x)
+  y = parseInt(y)
+  var datatemp = []
+  datatemp[0] = y + 1
+  axios.get('http://localhost:3000/mahasiswa/' + datatemp[0]).then((response) => {
+    Object.keys(response.data).map(function (key) {
+      if (key === 'nama') {
+        datatemp[2] = response.data['nama']
+      }
+      if (key === 'nrp') {
+        datatemp[1] = response.data['nrp']
+      }
+      if (key === 'angkatan') {
+        datatemp[3] = response.data['angkatan']
+      }
+      if (key === 'jeniskelamin') {
+        datatemp[4] = response.data['jeniskelamin']
+      }
+      if (key === 'tgllahir') {
+        datatemp[5] = response.data['tgllahir']
+      }
+      if (key === 'photo') {
+        datatemp[6] = response.data['photo']
+      }
+      if (key === 'aktif') {
+        datatemp[7] = response.data['aktif']
+      }
+    })
+    datatemp[x] = value
+    axios({
+      method: 'put',
+      url: 'http://localhost:3000/mahasiswa/' + datatemp[0],
+      data: {
+        id: datatemp[0],
+        nrp: datatemp[1],
+        nama: datatemp[2],
+        angkatan: datatemp[3],
+        jeniskelamin: datatemp[4],
+        tgllahir: datatemp[5],
+        photo: datatemp[6],
+        aktif: datatemp[7]
+      }
+    }).then((response) => {
+      console.log(response.data)
+    })
+  })
+}
+var insertrow = function(instance) {
+  axios({
+    method: 'post',
+    url: 'http://localhost:3000/mahasiswa/',
+    data: {
+    }
+  }).then((response) => {
+    console.log(response.data)
+  })
+}
+var deleterow = function(instance, id) {
+  var selectrow
+  console.log(id)
+  axios({
+    method: 'get',
+    url: 'http://localhost:3000/mahasiswa/',
+    data: {
+    }
+  }).then((response) => {
+    selectrow = Object.keys(response.data[id]).map(function (key) {
+      return response.data[id][key]
+    })
+    axios.delete('http://localhost:3000/mahasiswa/' + selectrow[0])
+  })
+}
 var options = {
-  data: data,
+  url: 'http://localhost:3000/mahasiswa',
+  onchange: changed,
+  oninsertrow: insertrow,
+  ondeleterow: deleterow,
   allowToolbar: true,
   columns: [
-    { type: 'numeric', title: 'NRP', width: '250px' },
-    { type: 'text', title: 'Nama Mahasiswa', width: '120px' },
-    { type: 'calendar', title: 'Tanggal Lahir', width: '250px' },
+    { type: 'hidden', title: 'id', width: '120px' },
+    { type: 'text', title: 'NRP', width: '120px' },
+    { type: 'text', title: 'Nama', width: '120px' },
+    { type: 'text', title: 'Angkatan', width: '120px' },
+    { type: 'dropdown', title: 'Jenis Kelamin', width: '250px', autocomplete: true, source: ['Laki-Laki', 'Perempuan'] },
+    { type: 'calendar', title: 'Tgl-Lahir', width: '250px' },
     { type: 'image', title: 'Photo', width: '120px' },
-    { type: 'checkbox', title: 'Status', width: '120px' }
+    { type: 'checkbox', title: 'Aktif', width: '80px' }
+    // { type: 'dropdown', title: 'Make', width: '250px', source: [ 'Alfa Romeo', 'Audi', 'Bmw' ] },
+    // { type: 'calendar', title: 'Available', width: '250px' },
+    // { type: 'image', title: 'Photo', width: '120px' },
+    // { type: 'checkbox', title: 'Stock', width: '80px' },
+    // { type: 'numeric', title: 'Price', width: '100px', mask: '$ #.##,00', decimal: ',' },
+    // { type: 'color', width: '100px', render: 'square' }
   ]
 }
 export default {
   name: 'App',
   mounted: function () {
-    let spreadsheet = jexcel(this.$el, options)
-    Object.assign(this, { spreadsheet })
+    this.load()
+  },
+  methods: {
+    load() {
+      let spreadsheet = jexcel(this.$el, options)
+      Object.assign(this, { spreadsheet })
+    }
   }
 }
 </script>
