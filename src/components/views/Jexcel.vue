@@ -1,122 +1,84 @@
 <template>
-  <div>
-    <div id="spreadsheet">
-      <input type="button" value="Add new row" @click="() => spreadsheet.insertRow()" />
-      <input type="button" value="Delete row" @click="() => spreadsheet.deleteRow()" />
+  <section class="content">
+    <div class="container">
+      <div class="row">
+        <div>
+          <div id="app" ref="spreadsheet"></div>
+          <div class="col-md-11">
+            <input type="button" class="btn btn-primary" value="Add Data" @click="() => spreadsheet.insertRow()" />
+            <input type="button" class="btn btn-primary" value="Delete Data" @click="() => spreadsheet.deleteRow()" />
+          </div>
+          <hr>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
+import axios from 'axios'
 import jexcel from 'jexcel'
 import 'jexcel/dist/jexcel.css'
-import axios from 'axios'
-var changed = function(instance, cell, x, y, value) {
-  x = parseInt(x)
-  y = parseInt(y)
-  var datatemp = []
-  datatemp[0] = y + 1
-  axios.get('http://localhost:3000/mahasiswa/' + datatemp[0]).then((response) => {
-    Object.keys(response.data).map(function (key) {
-      if (key === 'nama') {
-        datatemp[2] = response.data['nama']
-      }
-      if (key === 'nrp') {
-        datatemp[1] = response.data['nrp']
-      }
-      if (key === 'angkatan') {
-        datatemp[3] = response.data['angkatan']
-      }
-      if (key === 'jeniskelamin') {
-        datatemp[4] = response.data['jeniskelamin']
-      }
-      if (key === 'tgllahir') {
-        datatemp[5] = response.data['tgllahir']
-      }
-      if (key === 'photo') {
-        datatemp[6] = response.data['photo']
-      }
-      if (key === 'aktif') {
-        datatemp[7] = response.data['aktif']
-      }
-    })
-    datatemp[x] = value
-    axios({
-      method: 'put',
-      url: 'http://localhost:3000/mahasiswa/' + datatemp[0],
-      data: {
-        id: datatemp[0],
-        nrp: datatemp[1],
-        nama: datatemp[2],
-        angkatan: datatemp[3],
-        jeniskelamin: datatemp[4],
-        tgllahir: datatemp[5],
-        photo: datatemp[6],
-        aktif: datatemp[7]
-      }
-    }).then((response) => {
-      console.log(response.data)
-    })
-  })
-}
-var insertrow = function(instance) {
-  axios({
-    method: 'post',
-    url: 'http://localhost:3000/mahasiswa/',
-    data: {
-    }
-  }).then((response) => {
-    console.log(response.data)
-  })
-}
-var deleterow = function(instance, id) {
-  var selectrow
-  console.log(id)
-  axios({
-    method: 'get',
-    url: 'http://localhost:3000/mahasiswa/',
-    data: {
-    }
-  }).then((response) => {
-    selectrow = Object.keys(response.data[id]).map(function (key) {
-      return response.data[id][key]
-    })
-    axios.delete('http://localhost:3000/mahasiswa/' + selectrow[0])
-  })
-}
-var options = {
-  url: 'http://localhost:3000/mahasiswa',
-  onchange: changed,
-  oninsertrow: insertrow,
-  ondeleterow: deleterow,
-  allowToolbar: true,
-  columns: [
-    { type: 'hidden', title: 'id', width: '120px' },
-    { type: 'text', title: 'NRP', width: '120px' },
-    { type: 'text', title: 'Nama', width: '120px' },
-    { type: 'text', title: 'Angkatan', width: '120px' },
-    { type: 'dropdown', title: 'Jenis Kelamin', width: '250px', autocomplete: true, source: ['Laki-Laki', 'Perempuan'] },
-    { type: 'calendar', title: 'Tgl-Lahir', width: '250px' },
-    { type: 'image', title: 'Photo', width: '120px' },
-    { type: 'checkbox', title: 'Aktif', width: '80px' }
-    // { type: 'dropdown', title: 'Make', width: '250px', source: [ 'Alfa Romeo', 'Audi', 'Bmw' ] },
-    // { type: 'calendar', title: 'Available', width: '250px' },
-    // { type: 'image', title: 'Photo', width: '120px' },
-    // { type: 'checkbox', title: 'Stock', width: '80px' },
-    // { type: 'numeric', title: 'Price', width: '100px', mask: '$ #.##,00', decimal: ',' },
-    // { type: 'color', width: '100px', render: 'square' }
-  ]
-}
 export default {
-  name: 'App',
-  mounted: function () {
-    this.load()
+  mounted() {
+    let spreadsheet = jexcel(this.$el, this.jexcelOptions)
+    console.log(this.$el)
+    Object.assign(this, { spreadsheet })
   },
   methods: {
-    load() {
-      let spreadsheet = jexcel(this.$el, options)
-      Object.assign(this, { spreadsheet })
+    add() {
+      axios.post('http://localhost:8010/api/mahasiswa/').then(res => {
+        console.log('adding data in new row')
+      })
+    },
+    update(instance, cell, columns, row, value) {
+      axios.get('http://localhost:8010/api/mahasiswa/').then(res => {
+        var index = Object.values(res.data[row])
+        index[columns] = value
+        console.log(index)
+        axios.put('http://localhost:8010/api/mahasiswa/' + index[0], {
+          id: index[0],
+          nrp: index[1],
+          nama: index[2],
+          angkatan: index[3],
+          jk: index[4],
+          lahir: index[5],
+          foto: index[6],
+          aktif: index[7]
+        })
+      })
+    },
+    delete(instance, row) {
+      axios.get('http://localhost:8010/api/mahasiswa/').then(res => {
+        var index = Object.values(res.data[row])
+        console.log('delete : row', row, res.data[row])
+        axios.delete('http://localhost:8010/api/mahasiswa/' + index[0])
+      })
+    }
+  },
+  computed: {
+    jexcelOptions() {
+      return {
+        allowToolbar: true,
+        url: 'http://localhost:8010/api/mahasiswa/',
+        oninsertrow: this.add,
+        onchange: this.update,
+        ondeleterow: this.delete,
+        search: true,
+        pagination: 5,
+        csvHeaders: true,
+        columns: [
+          { type: 'hidden', title: 'id', width: '10px' },
+          { type: 'text', title: 'NRP', width: '120px' },
+          { type: 'text', title: 'Nama', width: '250px' },
+          { type: 'dropdown', title: 'Angkatan', width: '80px', source: [ '2019', '2018', '2017', '2016', '2015' ], autocomplete: true },
+          { type: 'dropdown', title: 'Jenis Kelamin', width: '200px', source: [ 'Laki-laki', 'Perempuan' ], autocomplete: true },
+          { type: 'calendar', title: 'Tanggal Lahir', width: '200px' },
+          { type: 'image', title: 'Photo', width: '200px' },
+          { type: 'checkbox', title: 'Aktif', width: '80px' }
+        ]
+      }
     }
   }
 }
-</script>
+</script> 
