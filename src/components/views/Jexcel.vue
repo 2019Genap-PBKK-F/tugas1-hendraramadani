@@ -7,6 +7,7 @@
           <div class="col-md-11">
             <input type="button" class="btn btn-primary" value="Add Data" @click="() => spreadsheet.insertRow()" />
             <input type="button" class="btn btn-primary" value="Delete Data" @click="() => spreadsheet.deleteRow()" />
+            <!-- <input v-on:keyup.46 = spreadsheet.deleteRow()> -->
           </div>
           <hr>
         </div>
@@ -51,8 +52,8 @@ export default {
     delete(instance, row) {
       axios.get('http://localhost:8010/api/mahasiswa/').then(res => {
         var index = Object.values(res.data[row])
-        console.log('delete : row', row, res.data[row])
         axios.delete('http://localhost:8010/api/mahasiswa/' + index[0])
+        console.log('delete : row', row, res.data[row])
       })
     }
   },
