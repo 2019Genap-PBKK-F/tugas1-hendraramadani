@@ -21,65 +21,62 @@ import axios from 'axios'
 import jexcel from 'jexcel'
 import 'jexcel/dist/jexcel.css'
 export default {
-  mounted() {
+  mounted () {
     let spreadsheet = jexcel(this.$el, this.jexcelOptions)
     console.log(this.$el)
     Object.assign(this, { spreadsheet })
   },
   methods: {
-    add() {
-      axios.post('http://10.199.14.46:8010/api/mahasiswa/').then(res => {
+    add () {
+      axios.post('http://10.199.14.46:8010/api/unit/').then(res => {
         console.log('adding data in new row')
       })
     },
-    update(instance, cell, columns, row, value) {
-      axios.get('http://10.199.14.46:8010/api/mahasiswa/').then(res => {
+    update (instance, cell, columns, row, value) {
+      axios.get('http://10.199.14.46:8010/api/unit/').then(res => {
         var index = Object.values(res.data[row])
         index[columns] = value
         console.log(index)
-        axios.put('http://10.199.14.46:8010/api/mahasiswa/' + index[0], {
+        axios.put('http://10.199.14.46:8010/api/unit/' + index[0], {
           id: index[0],
-          nrp: index[1],
-          nama: index[2],
-          angkatan: index[3],
-          jk: index[4],
-          lahir: index[5],
-          foto: index[6],
-          aktif: index[7]
+          kategoriunit_id: index[1],
+          nama: index[2]
         })
       })
     },
-    delete(instance, row) {
-      axios.get('http://10.199.14.46:8010/api/mahasiswa/').then(res => {
+    delete (instance, row) {
+      axios.get('http://10.199.14.46:8010/api/unit/').then(res => {
         var index = Object.values(res.data[row])
-        axios.delete('http://10.199.14.46:8010/api/mahasiswa/' + index[0])
+        axios.delete('http://10.199.14.46:8010/api/unit/' + index[0])
         console.log('delete : row', row, res.data[row])
       })
     }
   },
   computed: {
-    jexcelOptions() {
+    jexcelOptions () {
       return {
         allowToolbar: true,
-        url: 'http://10.199.14.46:8010/api/mahasiswa/',
+        url: 'http://10.199.14.46:8010/api/unit/',
         oninsertrow: this.add,
         onchange: this.update,
         ondeleterow: this.delete,
         search: true,
-        pagination: 5,
+        pagination: 10,
         csvHeaders: true,
+        responsive: true,
         columns: [
           { type: 'hidden', title: 'id', width: '10px' },
-          { type: 'text', title: 'NRP', width: '120px' },
-          { type: 'text', title: 'Nama', width: '250px' },
-          { type: 'dropdown', title: 'Angkatan', width: '80px', source: [ '2019', '2018', '2017', '2016', '2015' ], autocomplete: true },
-          { type: 'dropdown', title: 'Jenis Kelamin', width: '200px', source: [ 'Laki-laki', 'Perempuan' ], autocomplete: true },
-          { type: 'calendar', title: 'Tanggal Lahir', width: '200px' },
-          { type: 'image', title: 'Photo', width: '200px' },
-          { type: 'checkbox', title: 'Aktif', width: '80px' }
+          { type: 'dropdown', title: 'Kategori Unit', width: '150px', url: 'http://10.199.14.46:8010/api/namakategori/' },
+          { type: 'text', title: 'Nama Unit', width: '150px' }
+        //   { type: 'text', title: 'Nama', width: '250px' },
+        //   { type: 'dropdown', title: 'Angkatan', width: '80px', source: [ '2019', '2018', '2017', '2016', '2015' ], autocomplete: true },
+        //   { type: 'dropdown', title: 'Jenis Kelamin', width: '200px', source: [ 'Laki-laki', 'Perempuan' ], autocomplete: true },
+        //   { type: 'calendar', title: 'Tanggal Lahir', width: '200px' },
+        //   { type: 'image', title: 'Photo', width: '200px' },
+        //   { type: 'checkbox', title: 'Aktif', width: '80px' }
         ]
       }
     }
   }
 }
-</script> 
+</script>

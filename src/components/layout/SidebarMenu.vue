@@ -15,10 +15,40 @@
     </router-link>
 
     <li class="header">ME</li>
-        <router-link tag="li" class="pageLink" to="/jexcel">
+    <router-link tag="li" class="pageLink" to="/jexcel">
       <a>
         <i class="fa fa-file-excel-o"></i>
         <span class="page">Jexcel</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/chart">
+      <a>
+        <i class="fa fa-bar-chart"></i>
+        <span class="page">Chart.js</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/kategoriunit">
+      <a>
+        <i class="fa fa-hand-o-down"></i>
+        <span class="page">Kategori Unit</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/datadasar">
+      <a>
+        <i class="fa fa-hand-o-left"></i>
+        <span class="page">Data Dasar</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/unit">
+      <a>
+        <i class="fa fa-hand-o-up"></i>
+        <span class="page">Unit</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/capaianunit">
+      <a>
+        <i class="fa fa-hand-o-right"></i>
+        <span class="page">Capaian Unit</span>
       </a>
     </router-link>
     <router-link tag="li" class="pageLink" to="/tasks">

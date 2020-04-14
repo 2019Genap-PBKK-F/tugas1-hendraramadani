@@ -11,6 +11,11 @@ import AccessView from './components/views/Access.vue'
 import ServerView from './components/views/Server.vue'
 import ReposView from './components/views/Repos.vue'
 import Jexcel from './components/views/Jexcel.vue'
+import Chart from './components/views/Chart.vue'
+import kategoriunit from './components/views/kategoriunit.vue'
+import datadasar from './components/views/datadasar.vue'
+import unit from './components/views/unit.vue'
+import capaianunit from './components/views/capaianunit.vue'
 
 // Routes
 const routes = [
@@ -63,6 +68,31 @@ const routes = [
         component: Jexcel,
         name: 'Jexcel',
         meta: {description: 'JavaScript Excel'}
+      }, {
+        path: 'chart',
+        component: Chart,
+        name: 'Chart',
+        meta: {description: 'Chart.js'}
+      }, {
+        path: 'kategoriunit',
+        component: kategoriunit,
+        name: 'kategoriunit',
+        meta: {description: 'kategoriunit'}
+      }, {
+        path: 'datadasar',
+        component: datadasar,
+        name: 'datadasar',
+        meta: {description: 'data dasar'}
+      }, {
+        path: 'unit',
+        component: unit,
+        name: 'unit',
+        meta: {description: 'unit'}
+      }, {
+        path: 'capaianunit',
+        component: capaianunit,
+        name: 'capaianunit',
+        meta: {description: 'capaianunit'}
       }
     ]
   }, {
