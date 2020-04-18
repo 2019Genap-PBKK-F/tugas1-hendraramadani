@@ -28,26 +28,29 @@ export default {
   },
   methods: {
     add () {
-      axios.post('http://10.199.14.46:8010/api/unit/').then(res => {
+      axios.post('http://localhost:8010/api/satuankerja/').then(res => {
         console.log('adding data in new row')
       })
     },
     update (instance, cell, columns, row, value) {
-      axios.get('http://10.199.14.46:8010/api/unit/').then(res => {
+      axios.get('http://localhost:8010/api/satuankerja/').then(res => {
         var index = Object.values(res.data[row])
         index[columns] = value
         console.log(index)
-        axios.put('http://10.199.14.46:8010/api/unit/' + index[0], {
+        axios.put('http://localhost:8010/api/satuankerja/' + index[0], {
           id: index[0],
-          kategoriunit_id: index[1],
-          nama: index[2]
+          id_jns_satker: index[1],
+          id_induk_satker: index[2],
+          nama: index[3],
+          email: index[4],
+          expired_date: index[7]
         })
       })
     },
     delete (instance, row) {
-      axios.get('http://10.199.14.46:8010/api/unit/').then(res => {
+      axios.get('http://localhost:8010/api/satuankerja/').then(res => {
         var index = Object.values(res.data[row])
-        axios.delete('http://10.199.14.46:8010/api/unit/' + index[0])
+        axios.delete('http://localhost:8010/api/satuankerja/' + index[0])
         console.log('delete : row', row, res.data[row])
       })
     }
@@ -56,7 +59,7 @@ export default {
     jexcelOptions () {
       return {
         allowToolbar: true,
-        url: 'http://10.199.14.46:8010/api/unit/',
+        url: 'http://localhost:8010/api/satuankerja/',
         oninsertrow: this.add,
         onchange: this.update,
         ondeleterow: this.delete,
@@ -66,8 +69,13 @@ export default {
         responsive: true,
         columns: [
           { type: 'hidden', title: 'id', width: '10px' },
-          { type: 'dropdown', title: 'Kategori Unit', width: '150px', url: 'http://10.199.14.46:8010/api/namakategori/' },
-          { type: 'text', title: 'Nama Unit', width: '150px' }
+          { type: 'dropdown', title: 'Jenis satuankerja', width: '150px', url: 'http://localhost:8010/api/namasatuankerja/' },
+          { type: 'text', title: 'Id induk Satuan Kerja', width: '150px' },
+          { type: 'text', title: 'Nama satuankerja', width: '150px' },
+          { type: 'text', title: 'Email', width: '150px' },
+          { type: 'text', title: 'Create Date', width: '250px', readOnly: true },
+          { type: 'text', title: 'Last Update', width: '250px', readOnly: true },
+          { type: 'calendar', title: 'Expired Date', width: '200px' }
         //   { type: 'text', title: 'Nama', width: '250px' },
         //   { type: 'dropdown', title: 'Angkatan', width: '80px', source: [ '2019', '2018', '2017', '2016', '2015' ], autocomplete: true },
         //   { type: 'dropdown', title: 'Jenis Kelamin', width: '200px', source: [ 'Laki-laki', 'Perempuan' ], autocomplete: true },

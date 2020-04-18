@@ -12,10 +12,15 @@ import ServerView from './components/views/Server.vue'
 import ReposView from './components/views/Repos.vue'
 import Jexcel from './components/views/Jexcel.vue'
 import Chart from './components/views/Chart.vue'
-import kategoriunit from './components/views/kategoriunit.vue'
+import kategoriunit from './components/views/jenissatker.vue'
 import datadasar from './components/views/datadasar.vue'
-import unit from './components/views/unit.vue'
+import unit from './components/views/satuankerja.vue'
 import capaianunit from './components/views/capaianunit.vue'
+import periode from './components/views/periode.vue'
+import masterindikator from './components/views/masterindikator.vue'
+import indikatorperiode from './components/views/indikatorperiode.vue'
+import indikatorsatuankerja from './components/views/indikatorsatuankerja.vue'
+import indikatorsatuankerjalog from './components/views/indikatorsatuankerjalog.vue'
 
 // Routes
 const routes = [
@@ -93,6 +98,31 @@ const routes = [
         component: capaianunit,
         name: 'capaianunit',
         meta: {description: 'capaianunit'}
+      }, {
+        path: 'periode',
+        component: periode,
+        name: 'periode',
+        meta: {description: 'periode'}
+      }, {
+        path: 'masterindikator',
+        component: masterindikator,
+        name: 'masterindikator',
+        meta: {description: 'masterindikator'}
+      }, {
+        path: 'indikatorperiode',
+        component: indikatorperiode,
+        name: 'indikatorperiode',
+        meta: {description: 'indikatorperiode'}
+      }, {
+        path: 'indikatorsatuankerja',
+        component: indikatorsatuankerja,
+        name: 'indikatorsatuankerja',
+        meta: {description: 'indikatorsatuankerja'}
+      }, {
+        path: 'indikatorsatuankerjalog',
+        component: indikatorsatuankerjalog,
+        name: 'indikatorsatuankerjalog',
+        meta: {description: 'indikatorsatuankerjalog'}
       }
     ]
   }, {
