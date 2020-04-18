@@ -39,7 +39,7 @@ export default {
           pagination: 10,
           csvHeaders: true,
           columns: [
-            { type: 'text', title: 'id', width: '100px' },
+            { type: 'text', title: 'Tahun', width: '100px' },
             { type: 'text', title: 'Nama', width: '150px' },
             { type: 'text', title: 'Create Date', width: '250px', readOnly: true },
             { type: 'text', title: 'Last Update', width: '250px', readOnly: true }

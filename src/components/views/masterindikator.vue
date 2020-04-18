@@ -40,8 +40,8 @@ export default {
           csvHeaders: true,
           columns: [
             { type: 'hidden', title: 'id', width: '0px' },
-            { type: 'text', title: 'Id Pembilang', width: '100px' },
-            { type: 'text', title: 'Id Penyebut', width: '100px' },
+            { type: 'dropdown', title: 'Id Pembilang', url: 'http://localhost:8010/api/dddatadasarid/', width: '100px' },
+            { type: 'dropdown', title: 'Id Penyebut', url: 'http://localhost:8010/api/dddatadasarid/', width: '100px' },
             { type: 'text', title: 'Nama', width: '100px' },
             { type: 'textbox', title: 'Deskripsi', width: '150px' },
             { type: 'text', title: 'Default Bobot', width: '100px' },

@@ -12,9 +12,9 @@ import ServerView from './components/views/Server.vue'
 import ReposView from './components/views/Repos.vue'
 import Jexcel from './components/views/Jexcel.vue'
 import Chart from './components/views/Chart.vue'
-import kategoriunit from './components/views/jenissatker.vue'
+import jenissatuankerja from './components/views/jenissatker.vue'
 import datadasar from './components/views/datadasar.vue'
-import unit from './components/views/satuankerja.vue'
+import satuankerja from './components/views/satuankerja.vue'
 import capaianunit from './components/views/capaianunit.vue'
 import periode from './components/views/periode.vue'
 import masterindikator from './components/views/masterindikator.vue'
@@ -79,20 +79,20 @@ const routes = [
         name: 'Chart',
         meta: {description: 'Chart.js'}
       }, {
-        path: 'kategoriunit',
-        component: kategoriunit,
-        name: 'kategoriunit',
-        meta: {description: 'kategoriunit'}
+        path: 'jenissatuankerja',
+        component: jenissatuankerja,
+        name: 'jenissatuankerja',
+        meta: {description: 'jenissatuankerja'}
       }, {
         path: 'datadasar',
         component: datadasar,
         name: 'datadasar',
         meta: {description: 'data dasar'}
       }, {
-        path: 'unit',
-        component: unit,
-        name: 'unit',
-        meta: {description: 'unit'}
+        path: 'satuankerja',
+        component: satuankerja,
+        name: 'satuankerja',
+        meta: {description: 'satuankerja'}
       }, {
         path: 'capaianunit',
         component: capaianunit,

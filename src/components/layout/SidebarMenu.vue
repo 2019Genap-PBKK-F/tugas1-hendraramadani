@@ -27,10 +27,10 @@
         <span class="page">Chart.js</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/kategoriunit">
+    <router-link tag="li" class="pageLink" to="/jenissatuankerja">
       <a>
         <i class="fa fa-hand-o-down"></i>
-        <span class="page">Kategori Unit</span>
+        <span class="page">Jenis Satuan Kerja</span>
       </a>
     </router-link>
     <router-link tag="li" class="pageLink" to="/datadasar">
@@ -39,16 +39,41 @@
         <span class="page">Data Dasar</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/unit">
+    <router-link tag="li" class="pageLink" to="/satuankerja">
       <a>
         <i class="fa fa-hand-o-up"></i>
-        <span class="page">Unit</span>
+        <span class="page">Satuan Kerja</span>
       </a>
     </router-link>
     <router-link tag="li" class="pageLink" to="/capaianunit">
       <a>
         <i class="fa fa-hand-o-right"></i>
         <span class="page">Capaian Unit</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/masterindikator">
+      <a>
+        <span class="page">Master Indikator</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/periode">
+      <a>
+        <span class="page">Periode</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/indikatorperiode">
+      <a>
+        <span class="page">Indikator Periode</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/indikatorsatuankerja">
+      <a>
+        <span class="page">Indikator Satuan Kerja</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/indikatorsatuankerjalog">
+      <a>
+        <span class="page">Log Indikator Satuan Kerja</span>
       </a>
     </router-link>
     <router-link tag="li" class="pageLink" to="/tasks">

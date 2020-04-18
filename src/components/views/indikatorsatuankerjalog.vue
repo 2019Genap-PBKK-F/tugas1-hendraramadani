@@ -5,7 +5,6 @@
         <div>
           <div id="app" ref="spreadsheet"></div>
           <div class="col-md-11">
-            <input type="button" class="btn btn-primary" value="Add Data" @click="() => spreadsheet.insertRow()" />
             <input type="button" class="btn btn-primary" value="Delete Data" @click="() => spreadsheet.deleteRow()" />
             <!-- <input v-on:keyup.46 = spreadsheet.deleteRow()> -->
           </div>
@@ -47,10 +46,10 @@ export default {
         pagination: 10,
         csvHeaders: true,
         columns: [
-          { type: 'text', title: 'Id Satuan Kerja', width: '150px' },
-          { type: 'text', title: 'Id Master', width: '150px' },
-          { type: 'text', title: 'Id Periode', width: '150px' },
-          { type: 'text', title: 'Capaian', width: '150px' },
+          { type: 'text', title: 'Id Satuan Kerja', width: '150px', readOnly: true },
+          { type: 'text', title: 'Id Master', width: '150px', readOnly: true },
+          { type: 'text', title: 'Id Periode', width: '150px', readOnly: true },
+          { type: 'text', title: 'Capaian', width: '150px', readOnly: true },
           { type: 'text', title: 'Create Date', width: '200px', readOnly: true }
         //   { type: 'text', title: 'Nama', width: '250px' },
         //   { type: 'dropdown', title: 'Angkatan', width: '80px', source: [ '2019', '2018', '2017', '2016', '2015' ], autocomplete: true },
