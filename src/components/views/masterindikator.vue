@@ -40,8 +40,10 @@ export default {
           csvHeaders: true,
           columns: [
             { type: 'hidden', title: 'id', width: '0px' },
-            { type: 'dropdown', title: 'Id Pembilang', url: 'http://localhost:8010/api/dddatadasarid/', width: '100px' },
-            { type: 'dropdown', title: 'Id Penyebut', url: 'http://localhost:8010/api/dddatadasarid/', width: '100px' },
+            { type: 'dropdown', title: 'Aspek', url: 'http://localhost:8010/api/ddaspek/', width: '100px', autocomplete: true },
+            { type: 'dropdown', title: 'Komponen Aspek', url: 'http://localhost:8010/api/ddkomponenaspek/', width: '100px', autocomplete: true },
+            { type: 'dropdown', title: 'Id Pembilang', url: 'http://localhost:8010/api/dddatadasarid/', width: '100px', autocomplete: true },
+            { type: 'dropdown', title: 'Id Penyebut', url: 'http://localhost:8010/api/dddatadasarid/', width: '100px', autocomplete: true },
             { type: 'text', title: 'Nama', width: '100px' },
             { type: 'textbox', title: 'Deskripsi', width: '150px' },
             { type: 'text', title: 'Default Bobot', width: '100px' },
@@ -66,12 +68,14 @@ export default {
         console.log(index)
         axios.put('http://localhost:8010/api/masterindikator/' + index[0], {
           id: index[0],
-          id_penyebut: index[1],
-          id_pembilang: index[2],
-          nama: index[3],
-          deskripsi: index[4],
-          default_bobot: index[5],
-          expired_date: index[8]
+          id_aspek: index[1],
+          komponen_aspek: index[2],
+          id_penyebut: index[3],
+          id_pembilang: index[4],
+          nama: index[5],
+          deskripsi: index[6],
+          default_bobot: index[7],
+          expired_date: index[10]
         })
       })
     },

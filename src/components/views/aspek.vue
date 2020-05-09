@@ -28,31 +28,26 @@ export default {
   },
   methods: {
     add () {
-      axios.post('http://localhost:8010/api/satuankerja/').then(res => {
+      axios.post('http://localhost:8010/api/aspek').then(res => {
         console.log('adding data in new row')
       })
     },
     update (instance, cell, columns, row, value) {
-      axios.get('http://localhost:8010/api/satuankerja/').then(res => {
+      axios.get('http://localhost:8010/api/aspek/').then(res => {
         var index = Object.values(res.data[row])
         index[columns] = value
         console.log(index)
-        axios.put('http://localhost:8010/api/satuankerja/' + index[0], {
+        axios.put('http://localhost:8010/api/aspek/' + index[0], {
           id: index[0],
-          id_satker: index[1],
-          id_jns_satker: index[2],
-          id_induk_satker: index[3],
-          nama: index[4],
-          level_unit: index[5],
-          email: index[6],
-          expired_date: index[9]
+          aspek: index[1],
+          komponen_aspek: index[2]
         })
       })
     },
     delete (instance, row) {
-      axios.get('http://localhost:8010/api/satuankerja/').then(res => {
+      axios.get('http://localhost:8010/api/aspek').then(res => {
         var index = Object.values(res.data[row])
-        axios.delete('http://localhost:8010/api/satuankerja/' + index[0])
+        axios.delete('http://localhost:8010/api/aspek/' + index[0])
         console.log('delete : row', row, res.data[row])
       })
     }
@@ -61,25 +56,17 @@ export default {
     jexcelOptions () {
       return {
         allowToolbar: true,
-        url: 'http://localhost:8010/api/satuankerja/',
+        url: 'http://localhost:8010/api/aspek',
         oninsertrow: this.add,
         onchange: this.update,
         ondeleterow: this.delete,
         search: true,
         pagination: 10,
         csvHeaders: true,
-        responsive: true,
         columns: [
           { type: 'hidden', title: 'id', width: '10px' },
-          { type: 'text', title: 'Id Satuan Kerja', width: '200px' },
-          { type: 'dropdown', title: 'Jenis satuankerja', width: '150px', url: 'http://localhost:8010/api/namasatuankerja/' },
-          { type: 'text', title: 'Id induk Satuan Kerja', width: '200px' },
-          { type: 'text', title: 'Nama satuankerja', width: '150px' },
-          { type: 'text', title: 'Level Unit', width: '150px' },
-          { type: 'text', title: 'Email', width: '150px' },
-          { type: 'text', title: 'Create Date', width: '250px', readOnly: true },
-          { type: 'text', title: 'Last Update', width: '250px', readOnly: true },
-          { type: 'calendar', title: 'Expired Date', width: '200px' }
+          { type: 'text', title: 'Nama Aspek', width: '250px' },
+          { type: 'text', title: 'Komponen Aspek', width: '350px' }
         //   { type: 'text', title: 'Nama', width: '250px' },
         //   { type: 'dropdown', title: 'Angkatan', width: '80px', source: [ '2019', '2018', '2017', '2016', '2015' ], autocomplete: true },
         //   { type: 'dropdown', title: 'Jenis Kelamin', width: '200px', source: [ 'Laki-laki', 'Perempuan' ], autocomplete: true },

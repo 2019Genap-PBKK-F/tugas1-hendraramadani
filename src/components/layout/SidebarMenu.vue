@@ -27,6 +27,26 @@
         <span class="page">Chart.js</span>
       </a>
     </router-link>
+        <router-link tag="li" class="pageLink" to="/dosen">
+      <a>
+        <span class="page">Dosen</span>
+      </a>
+    </router-link>
+        <router-link tag="li" class="pageLink" to="/abmas">
+      <a>
+        <span class="page">Abmas</span>
+      </a>
+    </router-link>
+        <router-link tag="li" class="pageLink" to="/penelitian">
+      <a>
+        <span class="page">Penelitian</span>
+      </a>
+    </router-link>
+        <router-link tag="li" class="pageLink" to="/publikasi">
+      <a>
+        <span class="page">Publikasi</span>
+      </a>
+    </router-link>
     <router-link tag="li" class="pageLink" to="/jenissatuankerja">
       <a>
         <i class="fa fa-hand-o-down"></i>
@@ -49,6 +69,11 @@
       <a>
         <i class="fa fa-hand-o-right"></i>
         <span class="page">Capaian Unit</span>
+      </a>
+    </router-link>
+    <router-link tag="li" class="pageLink" to="/aspek">
+      <a>
+        <span class="page">Aspek</span>
       </a>
     </router-link>
     <router-link tag="li" class="pageLink" to="/masterindikator">

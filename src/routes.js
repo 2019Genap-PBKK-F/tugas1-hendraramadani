@@ -14,6 +14,7 @@ import Jexcel from './components/views/Jexcel.vue'
 import Chart from './components/views/Chart.vue'
 import jenissatuankerja from './components/views/jenissatker.vue'
 import datadasar from './components/views/datadasar.vue'
+import aspek from './components/views/aspek.vue'
 import satuankerja from './components/views/satuankerja.vue'
 import capaianunit from './components/views/capaianunit.vue'
 import periode from './components/views/periode.vue'
@@ -21,6 +22,10 @@ import masterindikator from './components/views/masterindikator.vue'
 import indikatorperiode from './components/views/indikatorperiode.vue'
 import indikatorsatuankerja from './components/views/indikatorsatuankerja.vue'
 import indikatorsatuankerjalog from './components/views/indikatorsatuankerjalog.vue'
+import dosen from './components/views/dosen.vue'
+import abmas from './components/views/abmas.vue'
+import penelitian from './components/views/penelitian.vue'
+import publikasi from './components/views/publikasi.vue'
 
 // Routes
 const routes = [
@@ -123,7 +128,33 @@ const routes = [
         component: indikatorsatuankerjalog,
         name: 'indikatorsatuankerjalog',
         meta: {description: 'indikatorsatuankerjalog'}
+      }, {
+        path: 'aspek',
+        component: aspek,
+        name: 'aspek',
+        meta: {description: 'aspek'}
+      }, {
+        path: 'dosen',
+        component: dosen,
+        name: 'dosen',
+        meta: {description: 'dosen'}
+      }, {
+        path: 'abmas',
+        component: abmas,
+        name: 'abmas',
+        meta: {description: 'abmas'}
+      }, {
+        path: 'penelitian',
+        component: penelitian,
+        name: 'penelitian',
+        meta: {description: 'penelitian'}
+      }, {
+        path: 'publikasi',
+        component: publikasi,
+        name: 'publikasi',
+        meta: {description: 'publikasi'}
       }
+
     ]
   }, {
     // not found handler
